@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aes Demo</title>
+    <!--angular-->
+    <script src="https://code.angularjs.org/1.6.6/angular.min.js"></script>
+    <!--jQuery-->
+    <script
+        src="http://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!--bootstrap-->
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-jb1k1ntK2AaXuVTIiFXgcGvjcWQrYlrsxipJRLPdwnr1sHBRqSLowOD2q3dIL5KG" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Krona+One" rel="stylesheet">
+</head>
+
+<body>
+    <div style="padding: 40px;">
+        <div ng-app="TestApp" ng-controller="MyController as ctrl" ng-init="ctrl.init();">
+            <div class="alert alert-{{ ctrl.message.type }}" role="alert" ng-show="ctrl.message">{{ ctrl.message.text }}</div>
+
+            <form ng-show="ctrl.showLogin()">
+                <h2>Login</h2>
+                <div class="form-group">
+                    <label>user name</label>
+                    <input type="text" ng-model="ctrl.userName" class="form-control">
+                </div>
+                <div class="form-group">
+                        <label>password</label>
+                        <input type="password" ng-model="ctrl.password" class="form-control">
+                    </div>
+                    <button class="btn btn-default" type="submit" ng-click="ctrl.login()">Login</button>
+                    <input type="hidden" ng-model="ctrl.token" class="form-control">
+            </form>
+
+            <div ng-show="!ctrl.showLogin()">
+
+
+                <!--ADD FORM-->
+                <div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" ng-class="{'has-danger': ctrl.invalid('UserName')}">
+                                <label class="form-control-label">User Name</label>
+                                <input type="text" ng-model="ctrl.userToAdd.UserName" class="form-control" ng-class="{'is-invalid': ctrl.invalid('UserName')}">
+                                <div class="invalid-feedback" ng-if="ctrl.invalid('UserName')" ng-bind="ctrl.vmsg('UserName')"></div>
+                            </div>
+                            <div class="form-group" ng-class="{'has-danger': ctrl.invalid('FirstName')}">
+                                <label class="form-control-label">First Name</label>
+                                <input type="text" ng-model="ctrl.userToAdd.FirstName" class="form-control" ng-class="{'is-invalid': ctrl.invalid('FirstName')}">
+                                <div class="invalid-feedback" ng-if="ctrl.invalid('FirstName')" ng-bind="ctrl.vmsg('FirstName')"></div>
+                            </div>
+                            <div class="form-group" ng-class="{'has-danger': ctrl.invalid('LastName')}">
+                                <label class="form-control-label">Last Name</label>
+                                <input type="text" ng-model="ctrl.userToAdd.LastName" class="form-control" ng-class="{'is-invalid': ctrl.invalid('LastName')}">
+                                <div class="invalid-feedback" ng-if="ctrl.invalid('LastName')" ng-bind="ctrl.vmsg('LastName')"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" ng-model="ctrl.userToAdd.Email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Correspondence Email</label>
+                                <input type="text" ng-model="ctrl.userToAdd.CorrespondenceEmail" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Office Phone</label>
+                                <input type="text" ng-model="ctrl.userToAdd.OfficePhone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Cell Phone</label>
+                                <input type="text" ng-model="ctrl.userToAdd.CellPhone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Fax</label>
+                                <input type="text" ng-model="ctrl.userToAdd.Fax" class="form-control">
+                            </div>
+
+                        </div><!--col end-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Address 1</label>
+                                <input type="text" ng-model="ctrl.userToAdd.Address1" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Address 2</label>
+                                <input type="text" ng-model="ctrl.userToAdd.Address2" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" ng-model="ctrl.userToAdd.City" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Country</label>
+                                <input type="text" ng-model="ctrl.userToAdd.Country" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>State</label>
+                                <input type="text" ng-model="ctrl.userToAdd.State" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>PostalCode</label>
+                                <input type="text" ng-model="ctrl.userToAdd.PostalCode" class="form-control">
+                            </div>
+                            
+                        </div><!--col end-->
+
+                    </div><!--row end-->
+                    <button class="btn btn-default" type="submit" ng-click="ctrl.addUser()">Add user</button>
+                    
+
+                <button type="button" class="btn btn-outline-secondary btn-sm pull-right" style="margin-bottom: 20px;" ng-click="ctrl.logout();">Logout</button>
+                </div>
+                <!--ADD FORM END-->
+
+                                
+                <hr/>
+                <pre>{{ ctrl | json }}</pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script type="text/javascript">
+
+    //reference to mvc model
+    //var model = null;
+
+    angular
+        .module('TestApp', [])
+        .controller('MyController', MyController);
+
+    function MyController($http,$filter, validationService) {
+        var vm = this;
+        vm.token = '';
+		vm.message = null;
+        vm.userName = '';
+        vm.password = '';
+        vm.userToAdd = {};
+        //vm.invalidFieldsAdd = [];
+
+        vm.login = login;
+		vm.showLogin = showLogin;
+        vm.logout = logout;
+        vm.addUser = addUser;
+        vm.invalid = invalid;
+        vm.vmsg = vmsg;
+        vm.reset = reset;
+
+		vm.init = function(){
+			//load token
+			vm.token = localStorage.getItem("aesToken");
+			if(!showLogin()){
+				//getData();
+			}
+		}
+
+        var authUrl = 'http://aesauth.ipstset.com/auth/';
+        var esnUrl = 'http://aesesn.ipstset.com/esn/';
+
+        function login() {
+			$http.post(authUrl + 'tokens', {"userName": vm.userName, "password": vm.password})
+            .then(function (r) {
+                vm.password = '';
+				setAccessToken(r.data);
+                //getData();
+            }, function (r) {
+                //error
+                handleError(r);
+            });
+        }
+
+        function logout() {
+			setAccessToken(null);
+        }
+		
+		function showLogin(){
+			if(vm.token === null || vm.token === undefined || vm.token === ''){
+				return true;
+			}
+
+			return false;
+		}
+
+		function setAccessToken(token){
+			vm.token = token;
+			localStorage.setItem("aesToken",token);
+		}
+
+        function handleError(r){
+			if(r.status === 401) {
+				setAccessToken(null);
+                createMessage(r.status + ' ' + r.statusText,'danger');
+				return;
+			}
+            if(r.status === 400) {
+                if(r.data!=null)
+                {
+                    var error = r.data;
+                    var msg = error.message; 
+                    _.each(error.errors, function(err){
+                        msg += ' --' + err.message;
+
+                    });
+                    createMessage(msg,'danger');
+                    return;
+                }
+			}
+		
+            createMessage('some error occured...' + r.status + ' ' + r.statusText,'danger');
+		}
+
+        function addUser(){
+            vm.reset();
+
+            $http({
+				method: 'POST', 
+				url: esnUrl + 'users', 
+                data: vm.userToAdd,
+				headers: {'Authorization': 'Bearer ' + vm.token}
+			}).then(function(r) {
+					//success
+                    vm.userToAdd = {};
+                    createMessage("New user added",'success');
+				}, function(r) {
+					//error
+                    if(r.status === 400) {
+                        if(r.data!=null)
+                        {
+                            var error = r.data;
+                            createMessage('Please fix the errors highlighted below','danger');
+                            validationService.invalidFields = error.errors;     
+                            return;
+                        }
+                    }
+
+					handleError(r);
+				}
+			);	
+        }
+
+        function invalid(key) {
+            return validationService.isInvalid(key);
+        }
+
+        function vmsg(key) {
+            if (validationService.isInvalid(key)) {
+                return validationService.getMessage(key);
+            }
+            return null;
+        }
+
+        function reset() {
+            vm.message = null;
+            return validationService.reset();
+        }
+
+        function createMessage(msg,type){
+            vm.message = {
+                type: type,
+                text: msg 
+            };
+        }
+
+
+    };
+
+    //validation.module.js
+    angular
+        .module('TestApp')
+        .factory('validationService', validationService);
+
+    function validationService() {
+
+        var service = {
+            invalidFields: [],
+
+            isInvalid: function (key, objId) {
+
+                if (this.invalidFields == null) return false;
+
+                for (i = 0; i < this.invalidFields.length; i++) {
+                    if (key === this.invalidFields[i].name) {
+                        return true;
+                    }
+                }
+
+                return false;
+            },
+
+            getMessage: function (key, objId) {
+                if (this.invalidFields == null) return "";
+                for (i = 0; i < this.invalidFields.length; i++) {
+                    if (key === this.invalidFields[i].name) {
+                        return this.invalidFields[i].message;
+                    }
+                }
+                return "";
+            },
+
+            reset: function () {
+                this.invalidFields = [];
+            },
+        };
+
+        return service;
+
+    }
+
+
+    </script>
+
+</body>
+</html>

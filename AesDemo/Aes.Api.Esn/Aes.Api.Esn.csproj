@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aes.Api.Core\Aes.Api.Core.csproj" />
+    <ProjectReference Include="..\Aes.Data.Core\Aes.Data.Core.csproj" />
+    <ProjectReference Include="..\Aes.Data.Esn\Aes.Data.Esn.csproj" />
+    <ProjectReference Include="..\Aes.Domain.Core\Aes.Domain.Core.csproj" />
+    <ProjectReference Include="..\Aes.Domain.Esn\Aes.Domain.Esn.csproj" />
+  </ItemGroup>
+
+</Project>
